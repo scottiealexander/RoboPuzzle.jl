@@ -1,5 +1,5 @@
 # RoboPuzzle
-RoboPuzzle is a textual programming game based on the graphical programming game [*RoboZZle*](http://www.robozzle.com/beta/)© by Igor Ostrovsky. This version uses a text-based interface in the Julia programming language. 
+RoboPuzzle is a textual programming game based on the graphical programming game [*RoboZZle*](http://www.robozzle.com/beta/)© by Igor Ostrovsky. This version uses a text-based interface in the Julia programming language.
 
 # Requirements
 * [Julia](https://julialang.org/downloads/oldreleases.html) version 0.6.X (version 0.7 and above are not yet supported)
@@ -13,7 +13,7 @@ Pkg.clone("https://github.com/scottiealexander/RoboPuzzle.jl.git")
 Pkg.build("RoboPuzzle")
 ```
 
-**Note**: Building RoboPuzzle with also download and install it's dependencies, so it may take a while. See [**Dependencies**](#Dependencies) below for details.
+**Note**: Building RoboPuzzle with also download and install it's dependencies, so it may take a while. See [**Dependencies**](#dependencies) below for details.
 
 # Getting started
 Simply launch Julia and run:
