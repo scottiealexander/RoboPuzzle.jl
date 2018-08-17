@@ -1,0 +1,4 @@
+# solution: if red forward-left
+gray^s  x      x       green*
+red     x      x       gray
+green*  blue   red     blue*

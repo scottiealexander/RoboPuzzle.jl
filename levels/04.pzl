@@ -1,0 +1,4 @@
+# solution: turn left if green or blue
+gray^s    x      x       green*
+red       x      x       gray
+green*    gray   red	  blue*

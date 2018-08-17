@@ -1,0 +1,6 @@
+# solution: if red then left, if blue then right
+x       x      red     red
+x       x      gray    gray*
+blue    gray*  gray    red
+gray^n  x      gray    x
+x       gray*  blue    x
