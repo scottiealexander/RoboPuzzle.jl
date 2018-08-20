@@ -1,14 +1,14 @@
 # ============================================================================ #
 function make_board(str::String)
     if isfile(str)
-        raw = readstring(str)
+        raw = read(str, String)
     else
         raw = str
     end
 
     RAW_STR[1] = raw
 
-    lines = split.(decomment(split(strip(raw), r"\r|\r\n|\n")), r"\s+")
+    lines = map(x->split(x, r"\s+"), decomment(split(strip(raw), r"\r|\r\n|\n")))
 
     nrow = length(lines)
     ncol = mapreduce(length, max, lines)
