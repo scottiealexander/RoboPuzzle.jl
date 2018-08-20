@@ -46,14 +46,14 @@ function set_player(b::Board, x::Integer, y::Integer, facing::Bearing)
 end
 
 function set_square(b::Board, x::Integer, y::Integer, color::AbstractString="gray")
-    p = Rectangle((x,y), 1, 1, color=color)
+    p = matplotlib[:patches][:Rectangle]((x,y), 1, 1, color=color)
     b.squares[(x,y)] = p
     b.ax[:add_patch](p)
     return nothing
 end
 
 function set_coin(b::Board, x::Integer, y::Integer)
-    p = Coin((x+.5,y+.5), .2, color="gold")
+    p = matplotlib[:patches][:CirclePolygon]((x+.5,y+.5), .2, color="gold")
     b.coins[(x,y)] = p
     b.ax[:add_patch](p)
     return nothing
@@ -117,9 +117,11 @@ function refresh()
 end
 
 function clear!(b::Board)
-    clear!(b.squares)
-    clear!(b.coins)
-    clear!(b.player)
+    if plt[:fignum_exists](b.hf[:number])
+        clear!(b.squares)
+        clear!(b.coins)
+        clear!(b.player)
+    end
     b.counter = 0
     return b
 end
