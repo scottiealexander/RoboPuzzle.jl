@@ -4,7 +4,7 @@ using PyCall
 
 PyDict(pyimport("matplotlib")["rcParams"])["toolbar"] = "None"
 
-using PyPlot
+using PyPlot, Printf, LinearAlgebra
 import Acorn
 
 # export forward, left, right, get_color, red, green, blue, gray
@@ -20,13 +20,14 @@ include("./rbzl_acorn.jl")
 function run(k::Integer=1)
     load_level(k)
     ifile = joinpath(@__DIR__, "..", "programs", @sprintf("level_%02d.jl", k))
+    acorn_init()
     Acorn.acorn(ifile)
     close("all")
 end
 
 # ============================================================================ #
 # GLOBALS
-const BOARD = Vector{Board}(1)
-const RAW_STR = Vector{String}(1)
+const BOARD = Vector{Board}(undef, 1)
+const RAW_STR = Vector{String}(undef, 1)
 # ============================================================================ #
 end
