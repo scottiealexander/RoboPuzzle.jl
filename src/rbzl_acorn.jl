@@ -1,5 +1,5 @@
 function safe_eval(ex::Expr, ed::Acorn.Editor)
-    const wait_limit = 15.0
+    wait_limit = 15.0
 
     success = false
     expr = :(try catch err return err end)
@@ -18,10 +18,12 @@ function safe_eval(ex::Expr, ed::Acorn.Editor)
         if !istaskdone(t)
             killt = @task try
                 Base.throwto(t, InterruptException())
+            catch
             end
             try
                 schedule(killt, InterruptException(), error = false)
                 Acorn.setStatusMessage(ed, "Task killed!")
+            catch
             end
         else
             if isa(t.result, Exception)

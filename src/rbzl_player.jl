@@ -6,7 +6,7 @@ mutable struct Player
 end
 
 function Player(x::Integer, y::Integer, facing::Bearing=East)
-    const pts = [
+    pts = [
         -0.2 -0.2;
         -0.2 +0.2;
         +0.2 +0.0;
