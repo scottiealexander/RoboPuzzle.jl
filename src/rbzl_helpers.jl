@@ -80,6 +80,10 @@ end
 function load_level(n::Integer)
     name = @sprintf("%02d.pzl", n)
     pth = joinpath(@__DIR__, "..", "levels", name)
+    return load_level(pth)
+end
+
+function load_level(pth::AbstractString)
     if isfile(pth)
         make_board(pth)
     end
