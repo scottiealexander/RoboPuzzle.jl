@@ -26,7 +26,7 @@ moveto!(p::Player, x::Real, y::Real) = moveto!(p, [x, y])
 function moveto!(p::Player, xy::Vector{<:Real})
     df = xy .+ .5 .- p.loc
     p.h[:set_xy](p.h[:get_xy]() .+ df')
-    p.loc = xy + .5
+    p.loc = xy .+ .5
     return p
 end
 
@@ -63,8 +63,8 @@ function turn!(p::Player, d::Direction)
         # we only accept relative turns (i.e. LEFT and RIGHT)
         xfm = [1 0; 0 1]
     end
-    pts = (p.h[:get_xy]()' .- p.loc)
-    p.h[:set_xy]((xfm * pts .+ p.loc)')
+    pts = (permutedims(p.h[:get_xy](), (2, 1)) .- p.loc)
+    p.h[:set_xy](permutedims(xfm * pts .+ p.loc, (2, 1)))
 
     p.facing = Bearing(mod(Int(p.facing) + Int(d), 4))
 
