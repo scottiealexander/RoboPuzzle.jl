@@ -61,13 +61,12 @@ function inject_yield!(ex::Expr)
     return ex
 end
 
-function commandRun(ed::Acorn.Editor, args::String)
-    refresh()
-    src = "let\n" * Acorn.rowsToString(ed.rows) * "\nend"
+function evalCommand(str::AbstractString, ed::Acorn.Editor)
+    src = "let\n" * str * "\nend"
     exprs = Vector{Expr}()
     k = 1
     while k <= length(src)
-        ex, k = parse(src, k, greedy=true, raise=false)
+        ex, k = Meta.parse(src, k, greedy=true, raise=false)
         ex != nothing && push!(exprs, ex)
     end
 
@@ -84,7 +83,11 @@ function commandRun(ed::Acorn.Editor, args::String)
         bcontinue = bcontinue ? time() <= tend : false
         yield()
     end
+end
 
+function commandRun(ed::Acorn.Editor, args::String)
+    refresh()
+    evalCommand(Acorn.rowsToString(ed.rows), ed)
 end
 
 function commandReload(ed::Acorn.Editor, args::String)
@@ -92,7 +95,7 @@ function commandReload(ed::Acorn.Editor, args::String)
     refresh()
 end
 
-function commandLevel(ed::Acorn.Editor, args::String)
+function commandLoadLevel(ed::Acorn.Editor, args::String)
     level = ""
     loadLevelCB(ed::Acorn.Editor, buf::String, key::Char) = begin
         level = strip(buf)
@@ -101,33 +104,78 @@ function commandLevel(ed::Acorn.Editor, args::String)
     Acorn.editorPrompt(ed, "Level to load: ", callback=loadLevelCB, buf="",
         showcursor=true)
 
-    Acorn.setStatusMessage(ed, "Loading level: $(level)")
     try
-        if ismatch(r"^\d+\.pzl$", level)
-            ifile = joinpath(@__DIR__, "..", "levels", level)
-        elseif ismatch(r"\d+", level)
+        if occursin(r"\d+", level)
             k = parse(Int, level)
             load_level(k)
             ifile = joinpath(@__DIR__, "..", "programs", @sprintf("level_%02d.jl", k))
+        else
+            # load an existing level
+            if !endswith(level, ".pzl")
+                level *= ".pzl"
+            end
+            pzlfile = joinpath(@__DIR__, "..", "levels", level)
+            if isfile(pzlfile)
+                ifile = joinfile(@__DIR__, "..", "programs",
+                    splitext(level)[1] * ".jl")
+
+                load_level(pzlfile)
+            else
+                Acorn.setStatusMessage(ed, "[ERROR]: invalid level $(level)")
+                return nothing
+            end
+
         end
 
         Acorn.editorOpen(ed, ifile)
     catch
         Acorn.setStatusMessage(ed, "[ERROR]: invalid level $(level)")
     end
+    return nothing
 end
 
-Acorn.addCommand(:run, commandRun,
-           help="run: run the current script (crtl-x)")
+function commandLoadPuzzle(ed::Acorn.Editor, args::String)
+    level = ""
+    loadLevelCB(ed::Acorn.Editor, buf::String, key::Char) = begin
+        level = strip(buf)
+    end
 
-Acorn.setKeyBinding('x', "run")
+    Acorn.editorPrompt(ed, "Name of puzzle to load: ", callback=loadLevelCB, buf="",
+        showcursor=true)
 
-Acorn.addCommand(:reload, commandReload,
-           help="reload: reload the current board (crtl-r)")
+    if occursin(r"\d+", level)
+        k = parse(Int, level)
+        ifile = joinpath(@__DIR__, "..", "levels", @sprintf("%02d.pzl", k))
+    elseif occursin(r"^[\w\-]+$", level)
+        level *= ".pzl"
+        ifile = joinpath(@__DIR__, "..", "levels", levl)
+    else
+        Acorn.setStatusMessage(ed, "[ERROR]: invalid level $(level)")
+        return
+    end
 
-Acorn.setKeyBinding('r', "reload")
+    Acorn.editorOpen(ed, ifile)
+end
 
-Acorn.addCommand(:level, commandLevel,
-           help="level: load a names level (ctrl-o)")
+function acorn_init()
+    Acorn.addCommand(:run, commandRun,
+               help="run: run the current script (crtl-x)")
 
-Acorn.setKeyBinding('o', "level")
+    Acorn.setKeyBinding('x', "run")
+
+    Acorn.addCommand(:reload, commandReload,
+               help="reload: reload the current board (crtl-r)")
+
+    Acorn.setKeyBinding('r', "reload")
+
+    Acorn.addCommand(:level, commandLoadLevel,
+               help="level: load a level (ctrl-l)")
+
+    Acorn.setKeyBinding('l', "level")
+
+    Acorn.addCommand(:load, commandLoadPuzzle,
+               help="load: load a puzzle (ctrl-o)")
+
+    Acorn.rmKeyBinding('o')
+    Acorn.setKeyBinding('o', "load")
+end
