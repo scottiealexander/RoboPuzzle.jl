@@ -1,5 +1,9 @@
 module RoboPuzzle
 
+# silence the old "QApplication: invalid style override passed, ignoring it."
+# warning...
+ENV["QT_STYLE_OVERRIDE"] = ""
+
 using PyCall
 
 PyDict(pyimport("matplotlib")["rcParams"])["toolbar"] = "None"
