@@ -5,7 +5,7 @@ RoboPuzzle is a textual programming game based on the graphical programming game
 * [Julia](https://julialang.org/downloads/) version 0.7 or higher
 
 # Install
-1. Download [Julia](https://julialang.org/downloads/) (recommended 1.0)
+1. Download and install [Julia](https://julialang.org/downloads/) (recommended 1.0)
 2. Launch Julia
 3. Run the commands:
 ```julia
