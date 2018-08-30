@@ -15,7 +15,7 @@ function colorname(rgb::NTuple{3, Float64})
         return COLORS[rgb]
     else
         rgbs = collect(keys(COLORS))
-        (mn, k) = findmin(map(x->vecnorm(x .- rgb), rgbs))
+        (mn, k) = findmin(map(x->norm(x .- rgb), rgbs))
         return mn < 1.0 ? COLORS[rgbs[k]] : ""
     end
 end
