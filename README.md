@@ -14,7 +14,7 @@ Pkg.add(PackageSpec(url="https://github.com/scottiealexander/RoboPuzzle.jl.git",
 Pkg.build("RoboPuzzle")
 ```
 
-**Note**: Building RoboPuzzle with also download and install it's dependencies, so it may take a while. See [**Dependencies**](#dependencies) below for details.
+**Note**: Building RoboPuzzle will also download and install it's dependencies, so it may take a while. See [**Dependencies**](#dependencies) below for details.
 
 # Getting started
 Simply launch Julia and run:
