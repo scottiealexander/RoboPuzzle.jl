@@ -1,18 +1,13 @@
 module RoboPuzzle
 
-# silence the old "QApplication: invalid style override passed, ignoring it."
-# warning...
-ENV["QT_STYLE_OVERRIDE"] = ""
+function __init__()
+    # silence the old "QApplication: invalid style override passed, ignoring
+    #  it." warning...
+    Base.eval(Main, :(ENV["QT_STYLE_OVERRIDE"] = ""))
+end
 
-using PyCall
-
-PyDict(pyimport("matplotlib")["rcParams"])["toolbar"] = "None"
-
-using PyPlot, Printf, LinearAlgebra
+using PyCall, PyPlot, Printf, LinearAlgebra
 import Acorn
-
-# export forward, left, right, get_color, red, green, blue, gray
-# export refresh, game_over, load_level
 
 include("./rbzl_constants.jl")
 include("./rbzl_player.jl")
