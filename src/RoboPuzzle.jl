@@ -17,6 +17,7 @@ include("./rbzl_helpers.jl")
 include("./rbzl_acorn.jl")
 
 function run(k::Integer=1)
+    PyDict(pyimport("matplotlib")["rcParams"])["toolbar"] = "None"
     load_level(k)
     ifile = joinpath(@__DIR__, "..", "programs", @sprintf("level_%02d.jl", k))
     acorn_init()
