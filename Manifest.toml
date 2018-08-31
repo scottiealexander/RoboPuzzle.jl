@@ -4,7 +4,7 @@ git-tree-sha1 = "88ec959e50e0ee3843df6fb30abb276be8bc110c"
 repo-rev = "highlights-1.0"
 repo-url = "https://github.com/scottiealexander/Acorn.jl.git"
 uuid = "80049ee3-2ccd-5c0c-aeae-95eb0ffd3301"
-version = "0.0.0"
+version = "0.1.0"
 
 [[Base64]]
 uuid = "2a0f44e3-6c83-55bd-87e4-b1978d98bd5f"
