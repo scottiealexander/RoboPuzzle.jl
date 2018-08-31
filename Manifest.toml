@@ -1,6 +1,4 @@
 [[Acorn2]]
-git-tree-sha1 = "fb3cdeabc7d3bdac291d1a466fcf649f375ccdfe"
-repo-rev = "master"
 repo-url = "https://github.com/scottiealexander/Acorn2.jl"
 uuid = "db1ddef4-ad50-11e8-317c-f1573ad554df"
 version = "0.1.0"
