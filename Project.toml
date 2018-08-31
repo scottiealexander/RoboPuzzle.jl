@@ -1,6 +1,6 @@
-authors = ["scottiealexander <scottiealexander11@gmail.com>"]
 name = "RoboPuzzle"
 uuid = "b6c37e8e-ad40-11e8-1077-d1cbf6eeb248"
+authors = ["scottiealexander <scottiealexander11@gmail.com>"]
 version = "0.1.0"
 
 [deps]
