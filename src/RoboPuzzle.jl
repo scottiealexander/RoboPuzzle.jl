@@ -7,7 +7,8 @@ function __init__()
 end
 
 using PyCall, PyPlot, Printf, LinearAlgebra
-import Acorn
+
+include("./Acorn/Acorn.jl")
 
 include("./rbzl_constants.jl")
 include("./rbzl_player.jl")
