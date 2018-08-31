@@ -11,7 +11,6 @@ RoboPuzzle is a textual programming game based on the graphical programming game
 ```julia
 using Pkg
 Pkg.add(PackageSpec(url="https://github.com/scottiealexander/RoboPuzzle.jl.git"))
-Pkg.build("RoboPuzzle")
 ```
 
 **Note**: Building RoboPuzzle will also download and install it's dependencies, so it may take a while. See [**Dependencies**](#dependencies) below for details.
