@@ -4,6 +4,6 @@ authors = ["scottiealexander <scottiealexander11@gmail.com>"]
 version = "0.1.0"
 
 [deps]
-Acorn = "e0a433e4-ad4d-11e8-302c-03436699f821"
+Acorn2 = "db1ddef4-ad50-11e8-317c-f1573ad554df"
 PyCall = "438e738f-606a-5dbb-bf0a-cddfbfd45ab0"
 PyPlot = "d330b81b-6aea-500a-939a-2ce795aea3ee"
