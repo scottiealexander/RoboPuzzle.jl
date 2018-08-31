@@ -10,7 +10,7 @@ RoboPuzzle is a textual programming game based on the graphical programming game
 3. Run the commands:
 ```julia
 using Pkg
-Pkg.add(PackageSpec(url="https://github.com/scottiealexander/RoboPuzzle.jl.git", rev="0.7"))
+Pkg.add(PackageSpec(url="https://github.com/scottiealexander/RoboPuzzle.jl.git"))
 Pkg.build("RoboPuzzle")
 ```
 
