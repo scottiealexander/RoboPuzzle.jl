@@ -27,4 +27,4 @@ Do not be alarmed if running `import RoboPuzzle` take a long time the first time
 # Dependencies
 Automatically downloaded and installed dependencies:
 * [PyPlot.jl](https://github.com/JuliaPy/PyPlot.jl)
-* [Acorn.jl](https://github.com/scottiealexander/Acorn.jl/tree/highlights-1.0) (specifically the *highlights-1.0* branch)
+* [Acorn.jl](https://github.com/scottiealexander/Acorn.jl/tree/highlights-1.0) (Acorn's source is not included in this repo)
