@@ -1,3 +1,8 @@
+authors = ["scottiealexander <scottiealexander11@gmail.com>"]
+name = "RoboPuzzle"
+uuid = "b6c37e8e-ad40-11e8-1077-d1cbf6eeb248"
+version = "0.1.0"
+
 [deps]
 Acorn = "80049ee3-2ccd-5c0c-aeae-95eb0ffd3301"
 PyPlot = "d330b81b-6aea-500a-939a-2ce795aea3ee"
