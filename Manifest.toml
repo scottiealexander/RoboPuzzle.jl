@@ -1,9 +1,9 @@
 [[Acorn]]
-git-tree-sha1 = "a7db1517a893eeadbf283c417043b625b65d9b64"
-repo-rev = "master"
+git-tree-sha1 = "a692992ad1ee96342064d6c3e89851b431ca64ec"
+repo-rev = "highlights-1.0"
 repo-url = "https://github.com/scottiealexander/Acorn.jl.git"
-uuid = "80049ee3-2ccd-5c0c-aeae-95eb0ffd3301"
-version = "0.0.0"
+uuid = "e0a433e4-ad4d-11e8-302c-03436699f821"
+version = "0.1.0"
 
 [[Base64]]
 uuid = "2a0f44e3-6c83-55bd-87e4-b1978d98bd5f"
