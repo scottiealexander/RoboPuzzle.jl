@@ -12,7 +12,7 @@ function Player(x::Integer, y::Integer, facing::Bearing=East)
         +0.2 +0.0;
     ]
     loc = [x+.5 y+.5]
-    h = plt[:Polygon](pts .+ loc, facecolor="black")
+    h = plt.Polygon(pts .+ loc, facecolor="black")
     p = Player(h, vec(loc), facing)
 
     return set_to_face!(p, facing)
@@ -20,12 +20,12 @@ end
 
 # get the x,y location of the player in board corrdinates (i.e. which grid square)
 location(p::Player) = (Int(p.loc[1]-.5), Int(p.loc[2]-.5))
-clear!(p::Player) = p.h[:remove]()
+clear!(p::Player) = p.h.remove()
 
 moveto!(p::Player, x::Real, y::Real) = moveto!(p, [x, y])
 function moveto!(p::Player, xy::Vector{<:Real})
     df = xy .+ .5 .- p.loc
-    p.h[:set_xy](p.h[:get_xy]() .+ df')
+    p.h.set_xy(p.h.get_xy() .+ df')
     p.loc = xy .+ .5
     return p
 end
@@ -63,8 +63,8 @@ function turn!(p::Player, d::Direction)
         # we only accept relative turns (i.e. LEFT and RIGHT)
         xfm = [1 0; 0 1]
     end
-    pts = (permutedims(p.h[:get_xy](), (2, 1)) .- p.loc)
-    p.h[:set_xy](permutedims(xfm * pts .+ p.loc, (2, 1)))
+    pts = (permutedims(p.h.get_xy(), (2, 1)) .- p.loc)
+    p.h.set_xy(permutedims(xfm * pts .+ p.loc, (2, 1)))
 
     p.facing = Bearing(mod(Int(p.facing) + Int(d), 4))
 

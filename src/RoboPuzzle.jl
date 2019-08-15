@@ -18,7 +18,7 @@ include("./rbzl_helpers.jl")
 include("./rbzl_acorn.jl")
 
 function run(k::Integer=1)
-    PyDict(pyimport("matplotlib")["rcParams"])["toolbar"] = "None"
+    PyDict(pyimport("matplotlib")."rcParams")["toolbar"] = "None"
     load_level(k)
     idir = joinpath(@__DIR__, "..", "programs")
     if !isdir(idir)

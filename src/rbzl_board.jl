@@ -26,14 +26,14 @@ increment!(b::Board) = begin b.counter += 1 end
 
 function set_color(b::Board, x::Integer, y::Integer, col::AbstractString)
     if haskey(b.squares, (x, y))
-        b.squares[(x,y)][:set_facecolor](col)
+        b.squares[(x,y)].set_facecolor(col)
     end
     return nothing
 end
 
 function get_color(b::Board, x::Integer, y::Integer)
     !haskey(b.squares, (x, y)) && error("Invalid patch corrdinates!")
-    return colorname(b.squares[(x,y)][:get_facecolor]())
+    return colorname(b.squares[(x,y)].get_facecolor())
 end
 
 get_color(b::Board) = get_color(b, location(b.player)...)
@@ -41,21 +41,21 @@ get_color(b::Board) = get_color(b, location(b.player)...)
 function set_player(b::Board, x::Integer, y::Integer, facing::Bearing)
     set_to_face!(b.player, facing)
     moveto!(b.player, x, y)
-    b.ax[:add_patch](b.player.h)
+    b.ax.add_patch(b.player.h)
     return nothing
 end
 
 function set_square(b::Board, x::Integer, y::Integer, color::AbstractString="gray")
-    p = matplotlib[:patches][:Rectangle]((x,y), 1, 1, color=color)
+    p = matplotlib.patches.Rectangle((x,y), 1, 1, color=color)
     b.squares[(x,y)] = p
-    b.ax[:add_patch](p)
+    b.ax.add_patch(p)
     return nothing
 end
 
 function set_coin(b::Board, x::Integer, y::Integer)
-    p = matplotlib[:patches][:CirclePolygon]((x+.5,y+.5), .2, color="gold")
+    p = matplotlib.patches.CirclePolygon((x+.5,y+.5), .2, color="gold")
     b.coins[(x,y)] = p
-    b.ax[:add_patch](p)
+    b.ax.add_patch(p)
     return nothing
 end
 
@@ -76,11 +76,11 @@ function forward(b::Board)
     dst = Tuple{Int,Int}(destination(b.player))
     if haskey(b.squares, dst)
         moveto!(b.player, dst...)
-        b.hf[:canvas][:draw]()
+        b.hf.canvas.draw()
 
         if haskey(b.coins, dst)
             sleep(1/(SPEED*2))
-            b.coins[dst][:remove]()
+            b.coins[dst].remove()
             delete!(b.coins, dst)
             if isempty(b.coins)
                 message_box(b, "Final score: $(b.counter)!")
@@ -117,7 +117,7 @@ function refresh()
 end
 
 function clear!(b::Board)
-    if plt[:fignum_exists](b.hf[:number])
+    if plt.fignum_exists(b.hf.number)
         clear!(b.squares)
         clear!(b.coins)
         clear!(b.player)

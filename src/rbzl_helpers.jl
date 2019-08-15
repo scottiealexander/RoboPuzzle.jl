@@ -2,8 +2,8 @@ vline(x::AbstractVector{<:Real}; args...) = plot([x'; x'], ylim(); args...)
 hline(y::AbstractVector{<:Real}; args...) = plot(xlim(), [y'; y']; args...)
 
 function grid(ax; args...)
-    x = UnitRange{Int}(ax[:get_xlim]()...)
-    y = UnitRange{Int}(ax[:get_ylim]()...)
+    x = UnitRange{Int}(ax.get_xlim()...)
+    y = UnitRange{Int}(ax.get_ylim()...)
     vline(x; args...)
     hline(y; args...)
 end
@@ -27,35 +27,35 @@ end
 
 function clear!(x::PatchDict)
     for k in keys(x)
-        x[k][:remove]()
+        x[k].remove()
         delete!(x, k)
     end
     return x
 end
 
 function message_box(b::Board, str::String, color::String="orange")
-    ht = b.ax[:text](0.5, 0.5, str, fontsize=36, horizontalalignment="center",
-        verticalalignment="center", transform=b.ax[:transAxes],
+    ht = b.ax.text(0.5, 0.5, str, fontsize=36, horizontalalignment="center",
+        verticalalignment="center", transform=b.ax.transAxes,
         bbox=Dict{String,Any}("facecolor"=>color, "alpha"=>0.8))
     return ht
 end
 
 function blank_figure(hf::PyPlot.Figure)
-    if plt[:fignum_exists](hf[:number])
+    if plt.fignum_exists(hf.number)
         h = hf
     else
         h = figure(num="Robo-puzzle")
     end
 
-    for ax in h[:axes]
-        h[:delaxes](ax)
+    for ax in h.axes
+        h.delaxes(ax)
     end
 
-    ax = h[:add_axes]([0, 0, 1, 1])
+    ax = h.add_axes([0, 0, 1, 1])
 
-    ax[:set_frame_on](false)
-    ax[:set_xticks]([])
-    ax[:set_yticks]([])
+    ax.set_frame_on(false)
+    ax.set_xticks([])
+    ax.set_yticks([])
     return h, ax
 end
 
@@ -67,10 +67,10 @@ function init_board(ncol::Integer, nrow::Integer)
         h, ax = blank_figure(figure(num="Robo-puzzle"))
     end
 
-    h[:set_size_inches](ncol, nrow)
+    h.set_size_inches(ncol, nrow)
 
-    ax[:set_xlim](1, ncol+1)
-    ax[:set_ylim](1, nrow+1)
+    ax.set_xlim(1, ncol+1)
+    ax.set_ylim(1, nrow+1)
 
     grid(ax; color="black")
 
