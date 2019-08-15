@@ -21,9 +21,9 @@ Simply launch Julia and run:
 import RoboPuzzle
 RoboPuzzle.run()
 ```
-Do not be alarmed if running `import RoboPuzzle` take a long time the first time it is run (it's dependencies - namely [PyPlot.jl](https://github.com/JuliaPy/PyPlot.jl) - need to be precompiled).
+Do not be alarmed if running `import RoboPuzzle` take a long time the first time it is run (it's dependencies - namely [PyPlot.jl](https://github.com/JuliaPy/PyPlot.jl) - need to be downloaded and precompiled).
 
 # Dependencies
 Automatically downloaded and installed dependencies:
 * [PyPlot.jl](https://github.com/JuliaPy/PyPlot.jl)
-* [Acorn.jl](https://github.com/scottiealexander/Acorn.jl/tree/highlights-1.0) (Acorn's source is not included in this repo)
+* [Acorn.jl](https://github.com/scottiealexander/Acorn.jl/tree/highlights-1.0) (Acorn's source is now included in this repo)

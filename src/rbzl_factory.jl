@@ -1,6 +1,8 @@
 # ============================================================================ #
 function make_board(str::String)
-    if isfile(str)
+    # new line feeds cause errors in stat on windows when testing if str is a
+    # file...
+    if !occursin(r"[\r\n]+", str) && isfile(str)
         raw = read(str, String)
     else
         raw = str

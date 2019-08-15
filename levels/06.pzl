@@ -1,0 +1,5 @@
+# solution: turn left if the last square was blue
+gray^s    gray    blue     green*
+gray      blue*   gray     blue
+blue      gray    green*   gray
+green*    gray    blue     red*

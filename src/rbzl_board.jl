@@ -91,10 +91,13 @@ function forward(b::Board)
     return nothing
 end
 
+coins_remaining(b::Board) = length(b.coins)
+
 @inline left() = isassigned(BOARD, 1) && left(BOARD[1])
 @inline right() = isassigned(BOARD, 1) && right(BOARD[1])
 @inline forward() = isassigned(BOARD, 1) && forward(BOARD[1])
 @inline get_color() = isassigned(BOARD, 1) && get_color(BOARD[1])
+@inline coins_remaining() = isassigned(BOARD, 1) && coins_remaining(BOARD[1])
 
 @inline red() = get_color() == "red"
 @inline green() = get_color() == "green"
