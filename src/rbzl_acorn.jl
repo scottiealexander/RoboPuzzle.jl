@@ -27,7 +27,7 @@ function safe_eval(ex::Expr, ed::Acorn.Editor)
             end
         else
             if isa(t.result, Exception)
-                rethrow(t.result)
+                throw(t.result)
             else
                 success = true
             end
